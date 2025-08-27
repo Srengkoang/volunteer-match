@@ -7,25 +7,26 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
       {/* Top Navigation Bar */}
-      <nav className="absolute top-0 w-full p-4 bg-transparent text-white z-20">
+      {/* Changed bg-transparent-100 to bg-green-900 for better visibility */}
+      <nav className="absolute top-0 w-full p-4 bg-green-900 text-white z-20"> 
         <ul className="flex justify-end space-x-8 text-lg font-semibold">
-          <li><Link href="/dashboard" className="hover:text-green-300">Home</Link></li>
+          {/* Updated the href for the "Home" link to point to the root URL */}
+          <li><Link href="/" className="hover:text-green-300">Home</Link></li>
           <li><Link href="/organization" className="hover:text-green-300">Organization</Link></li>
           <li><Link href="/notifications" className="hover:text-green-300">Notifications</Link></li>
           <li><Link href="/opportunities" className="hover:text-green-300">Opportunities</Link></li>
         </ul>
       </nav>
 
-      {/* Hero Section: More Volunteer-Focused Text and CTA */}
+      {/* Hero Section: More Volunteer-Focused Text and CTA - Overlay Removed */}
       <section className="relative h-96 flex items-center justify-start p-8"
         // >>> IMPORTANT: REPLACE THIS WITH an IMAGE OF PEOPLE VOLUNTEERING or a community project <<<
         // Example: style={{ backgroundImage: "url('/images/hero-volunteers.jpg')", ... }}
         style={{ backgroundImage: "url('/path/to/your/dashboard-hero-image.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
         
-        {/* Overlay for text readability (pointer-events-none ensures clicks pass through) */}
-        <div className="absolute inset-0 bg-gray-700 opacity-50 pointer-events-none"></div> 
+        {/* Removed: Overlay for text readability was here */}
         
-        {/* Text content over image */}
+        {/* Text content over image - now directly on the background image */}
         <div className="relative z-10 text-white text-left ml-10">
           <h1 className="text-5xl font-bold text-green-400">Make a Difference. Volunteer.</h1>
           <h2 className="text-3xl font-bold mt-2">Find Your Purpose. Change Lives.</h2>
@@ -38,25 +39,26 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {/* About The Volunteer Section: More Inspiring Language - Now with green background and white text */}
-          <section className="container mx-auto py-12 px-8 flex flex-col md:flex-row items-center md:space-x-10 bg-green-400 text-gray-800"> {/* Changed bg-green-700 to bg-green-200 and text-white to text-gray-800 */}
-          <div className="md:w-1/3 mb-6 md:mb-0">
-          <h3 className="text-3xl text-green-700 font-bold mb-6">Empower Change: Join Our Volunteer Community</h3> {/* Remove text-green-700 */}
-          <div className="w-full h-auto rounded-full overflow-hidden shadow-lg bg-white-300">
-            {/* >>> IMPORTANT: REPLACE THIS WITH an IMAGE OF DIVERSE VOLUNTEERS WORKING TOGETHER <<< */}
-            {/* Example: src="/images/volunteers-working.jpg" */}
+      {/* About The Volunteer Section: More Inspiring Language - Now with light green background and dark text */}
+      <section className="container mx-auto py-12 px-8 flex flex-col md:flex-row items-center md:space-x-10 bg-green-200 text-gray-800"> 
+        <div className="md:w-1/3 mb-6 md:mb-0 flex justify-center"> {/* Added justify-center to center the image */}
+          <h3 className="text-3xl font-bold mb-6">Empower Change: Join Our Volunteer Community</h3> 
+          {/* Adjusted width and height for a perfect circular container */}
+          <div className="w-60 h-60 rounded-full overflow-hidden shadow-lg flex-shrink-0"> {/* Changed w-full h-auto to w-60 h-60, added flex-shrink-0 */}
+            {/* >>> IMPORTANT: The image below is now correctly referenced for public folder. <<< */}
+            {/* Ensure 'HTA_Timber-Valley_Alpha-Kappa-Alpha_April-15-2023.jpg' is in your /public folder */}
             <Image 
-              src="/path/to/your/volunteer-group-image.jpg" 
+              src="/HTA_Timber-Valley_Alpha-Kappa-Alpha_April-15-2023.jpg" 
               alt="Volunteers working together" 
-              width={100} 
-              height={100} 
+              width={240} // Matched width of parent div
+              height={240} // Matched height of parent div
               objectFit="cover"
               className="rounded-full" 
             />
           </div>
         </div>
         <div className="md:w-2/3 text-lg leading-relaxed">
-          <p> {/* Removed text-gray-800 or similar default */}
+          <p> 
             Our platform is dedicated to connecting passionate individuals with meaningful volunteer opportunities. 
             Whether you want to lend a hand locally or contribute to global initiatives, we help you discover 
             causes that resonate with your heart. Explore diverse roles, develop new skills, and become part of a 
@@ -65,13 +67,14 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {/* Opportunities Section: Retained for now */}
-      <section className="container mx-auto py-12 px-8">
+      {/* Opportunities Section: Retained for now - Padding standardized to p-4 */}
+      {/* Changed bg-white-100 to bg-white for a clear background */}
+      <section className="container mx-auto bg-white py-12 px-8"> 
         <h3 className="text-3xl font-bold text-green-700 mb-6 text-left">Explore Volunteer Pathways</h3>
         <p className="text-xl font-semibold text-gray-700 mb-8 text-center">Upcoming Campaigns & Roles</p>
         
         <div className="flex flex-wrap justify-center gap-8">
-          {/* Location Icon Block */}
+          {/* Location Icon Block - Padding changed to p-4 */}
           <Link href="/opportunities/location" passHref>
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer w-36">
               <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-white text-3xl mb-2">📍</div>
@@ -79,7 +82,7 @@ export default function DashboardPage() {
             </div>
           </Link>
 
-          {/* Time Icon Block */}
+          {/* Time Icon Block - Padding already p-4 */}
           <Link href="/opportunities/time" passHref>
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer w-36">
               <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-white text-3xl mb-2">🕒</div>
@@ -87,15 +90,15 @@ export default function DashboardPage() {
             </div>
           </Link>
 
-          {/* Organization Icon Block */}
-          <Link href="/opportunities/organization" passHref>
+          {/* Organization Icon Block - Padding changed to p-4 */}
+          <Link href="/organization" passHref>
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer w-36">
               <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-white text-3xl mb-2">🏢</div>
               <span className="text-sm font-medium text-gray-700">By Organization</span>
             </div>
           </Link>
 
-          {/* List Icon Block */}
+          {/* List Icon Block - Padding changed to p-4 */}
           <Link href="/opportunities/list" passHref>
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer w-36">
               <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-white text-3xl mb-2">📋</div>
@@ -105,16 +108,15 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {/* New Section: Feedback */}
+      {/* New Section: Feedback - Overlay Removed */}
       <section 
         className="relative py-12 px-8"
         style={{ backgroundImage: "url('/path/to/your/feedback-background-image.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
-        {/* Overlay for text readability (pointer-events-none ensures clicks pass through) */}
-        <div className="absolute inset-0 bg-green-700 opacity-50 pointer-events-none"></div> 
+        {/* Removed: Overlay for text readability was here */}
         
-        {/* Feedback Title */}
-        <h3 className="relative z-10 text-5xl font-bold text-green-400 text-center mb-12">Feedback</h3>
+        {/* Feedback Title - Text color changed back to gray for visibility without overlay */}
+        <h3 className="relative z-10 text-5xl font-bold text-gray-800 text-center mb-12">Feedback</h3> 
         
         {/* Feedback Cards Grid */}
         <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
@@ -196,9 +198,93 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {/* Optional: Add a simple footer to match other pages */}
-      <footer className="w-full text-center py-4 text-xs text-gray-600 bg-white shadow-inner">
-        <p>&copy; 2025 Volunteer Match. All rights reserved.</p>
+      {/* New Section: Donation */}
+      <section className="relative py-12 px-8 bg-green-700 text-white"> 
+        <div className="max-w-6xl mx-auto text-center">
+          <h3 className="text-5xl font-bold text-green-400 mb-4">Donation</h3>
+          <h4 className="text-3xl font-bold mb-12">Bring The Smile Together</h4>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* 10$ Donation Card */}
+            <div className="bg-green-500 rounded-lg shadow-lg p-6 flex flex-col items-center justify-between text-center">
+              <div>
+                <p className="text-5xl font-extrabold mb-2">10$</p>
+                <p className="text-sm mb-4">10$ Help Change the World</p>
+              </div>
+              <button className="bg-white text-green-700 hover:bg-gray-100 font-bold py-2 px-6 rounded-full transition-colors duration-300">
+                Donate Here
+              </button>
+            </div>
+
+            {/* 20$ Donation Card */}
+            <div className="bg-green-500 rounded-lg shadow-lg p-6 flex flex-col items-center justify-between text-center">
+              <div>
+                <p className="text-5xl font-extrabold mb-2">20$</p>
+                <p className="text-sm mb-4">20$ can save our world</p>
+              </div>
+              <button className="bg-white text-green-700 hover:bg-gray-100 font-bold py-2 px-6 rounded-full transition-colors duration-300">
+                Donate Here
+              </button>
+            </div>
+
+            {/* 50$ Donation Card */}
+            <div className="bg-green-500 rounded-lg shadow-lg p-6 flex flex-col items-center justify-between text-center">
+              <div>
+                <p className="text-5xl font-extrabold mb-2">50$</p>
+                <p className="text-sm mb-4">50$, a lot but meaningful</p>
+              </div>
+              <button className="bg-white text-green-700 hover:bg-gray-100 font-bold py-2 px-6 rounded-full transition-colors duration-300">
+                Donate Here
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced Footer */}
+      <footer className="bg-green-800 text-white py-8 px-8 rounded-t-lg shadow-inner">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {/* Column 1: Logo/Brand */}
+          <div className="col-span-full lg:col-span-1 text-center md:text-left">
+            <h4 className="text-3xl font-bold text-green-400 mb-4">VolunteerMatch</h4>
+            <p className="text-sm text-green-100">Connecting hearts, changing lives.</p>
+          </div>
+
+          {/* Column 2: Quick Links */}
+          <div>
+            <h5 className="text-xl font-semibold mb-4">Quick Links</h5>
+            <ul className="space-y-2">
+              <li><Link href="/dashboard" className="hover:text-green-300 transition-colors duration-200">Home</Link></li>
+              <li><Link href="/about" className="hover:text-green-300 transition-colors duration-200">About Us</Link></li>
+              <li><Link href="/opportunities" className="hover:text-green-300 transition-colors duration-200">Opportunities</Link></li>
+              <li><Link href="/contact" className="hover:text-green-300 transition-colors duration-200">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Explore */}
+          <div>
+            <h5 className="text-xl font-semibold mb-4">Explore</h5>
+            <ul className="space-y-2">
+              <li><Link href="/organization" className="hover:text-green-300 transition-colors duration-200">Organizations</Link></li>
+              <li><Link href="/feedback" className="hover:text-green-300 transition-colors duration-200">Volunteer Stories</Link></li>
+              <li><Link href="/donations" className="hover:text-green-300 transition-colors duration-200">Donate</Link></li>
+              <li><Link href="/faq" className="hover:text-green-300 transition-colors duration-200">FAQ</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Connect */}
+          <div className="text-center md:text-left">
+            <h5 className="text-xl font-semibold mb-4">Connect With Us</h5>
+            <div className="flex justify-center md:justify-start space-x-4 mb-6">
+              {/* Social Media Icons (placeholders) */}
+              <a href="#" className="text-green-300 hover:text-white transition-colors duration-200 text-2xl" aria-label="Facebook">📘</a>
+              <a href="#" className="text-green-300 hover:text-white transition-colors duration-200 text-2xl" aria-label="Twitter">🐦</a>
+              <a href="#" className="text-green-300 hover:text-white transition-colors duration-200 text-2xl" aria-label="Instagram">📸</a>
+              <a href="#" className="text-green-300 hover:text-white transition-colors duration-200 text-2xl" aria-label="LinkedIn">💼</a>
+            </div>
+            <p className="text-sm text-green-100">&copy; 2025 VolunteerMatch. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
