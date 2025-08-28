@@ -131,7 +131,7 @@ export default function App() {
           <h3 className="text-3xl font-bold mb-6">Empower Change: Join Our Volunteer Community</h3> 
           <div className="w-full h-auto rounded-full overflow-hidden shadow-lg">
             <img 
-              src="https://placehold.co/400x400/34D399/1F2937?text=Volunteers"
+              src="/HTA_Timber-Valley_Alpha-Kappa-Alpha_April-15-2023.jpg"
               alt="Volunteers working together" 
               className="w-full h-full rounded-full" 
             />
