@@ -27,6 +27,146 @@ const LinkedInIcon = () => (
   </svg>
 );
 
+// Define global lists for locations and times to be used in the dropdowns
+const predefinedLocations = [
+  { id: 1, name: "Community Garden", address: "123 Main St, Cityville", image: "https://placehold.co/100x100/A3E635/1F2937?text=Garden" },
+  { id: 2, name: "Central Park Cleanup", address: "456 Oak Ave, Townsville", image: "https://placehold.co/100x100/A3E635/1F2937?text=Park" },
+  { id: 3, name: "Food Bank Warehouse", address: "789 Pine Ln, Villagetown", image: "https://placehold.co/100x100/A3E635/1F2937?text=FoodBank" },
+  { id: 4, name: "Animal Shelter", address: "101 Maple Rd, Hamlet", image: "https://placehold.co/100x100/A3E635/1F2937?text=Shelter" },
+  { id: 5, name: "Elderly Care Center", address: "202 Elm Pl, Metropolis", image: "https://placehold.co/100x100/A3E635/1F2937?text=Care" },
+  { id: 6, name: "School Library", address: "303 Birch Ct, Suburbia", image: "https://placehold.co/100x100/A3E635/1F2937?text=Library" },
+  { id: 7, name: "Beach Cleanup", address: "404 Ocean Blvd, Seaside", image: "https://placehold.co/100x100/A3E635/1F2937?text=Beach" },
+  { id: 8, name: "Riverbank Restoration", address: "505 River Dr, Riverside", image: "https://placehold.co/100x100/A3E635/1F2937?text=River" },
+  { id: 9, name: "Urban Farming Project", address: "606 Field Rd, Countryside", image: "https://placehold.co/100x100/A3E635/1F2937?text=Farm" },
+  { id: 10, name: "Youth Sports Camp", address: "707 Court Ave, Sportstown", image: "https://placehold.co/100x100/A3E635/1F2937?text=Camp" },
+];
+
+const predefinedTimes = [
+  "31 August 2025",
+  "7 September 2025",
+  "14 September 2025",
+];
+
+
+// Registration Modal Component
+const RegistrationModal = ({ opportunity, onClose, onRegisterConfirm }) => {
+  const [name, setName] = useState('');
+  const [dob, setDob] = useState('');
+  const [sex, setSex] = useState('');
+  const [location, setLocation] = useState(''); 
+  const [time, setTime] = useState(''); 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onRegisterConfirm(opportunity, { name, dob, sex, location, time });
+    onClose(); // Close the modal after submission
+  };
+
+  return (
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full relative">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+        >
+          &times;
+        </button>
+        <h2 className="text-2xl font-bold text-green-700 mb-4 text-center">Register for {opportunity.title}</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              type="text"
+              id="name"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="dob" className="block text-sm font-medium text-gray-700">Date of Birth</label>
+            <input
+              type="date"
+              id="dob"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="sex" className="block text-sm font-medium text-gray-700">Sex</label>
+            <select
+              id="sex"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              value={sex}
+              onChange={(e) => setSex(e.target.value)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="O">Other</option>
+            </select>
+          </div>
+          {/* Location Dropdown */}
+          <div>
+            <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
+            <select
+              id="location"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+            >
+              <option value="">Select a location</option>
+              {predefinedLocations.map((loc) => (
+                <option key={loc.id} value={`${loc.name}, ${loc.address}`}>
+                  {loc.name} ({loc.address})
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* Time Dropdown */}
+          <div>
+            <label htmlFor="time" className="block text-sm font-medium text-gray-700">Preferred Date</label>
+            <select
+              id="time"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            >
+              <option value="">Select a date</option>
+              {predefinedTimes.map((date, index) => (
+                <option key={index} value={date}>
+                  {date}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex justify-end space-x-4 mt-6">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors shadow-md"
+            >
+              Confirm Registration
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
 
 // The main App component that manages the application state and view transitions.
 export default function App() {
@@ -34,6 +174,8 @@ export default function App() {
   const [currentView, setCurrentView] = useState('dashboard'); // Can be 'dashboard', 'organization', 'location', 'time', 'opportunitiesList'
   const [notifications, setNotifications] = useState([]); // State for notifications
   const [showNotifications, setShowNotifications] = useState(false); // State to toggle notification dropdown
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false); // State for registration modal
+  const [selectedOpportunity, setSelectedOpportunity] = useState(null); // State to store the selected opportunity for registration
 
   // Function to add a new notification
   const addNotification = (message) => {
@@ -62,6 +204,20 @@ export default function App() {
     addNotification(`Someone successfully donated $${amount}! Thank you!`); // Add notification
     alert(`Thank you for your interest in donating $${amount}! (Functionality to be implemented)`);
   };
+
+  // Handles the registration confirmation from the modal
+  const handleRegisterConfirm = (opportunity, formData) => {
+    console.log(`Confirmed registration for: ${opportunity.title} with details:`, formData);
+    addNotification(`User '${formData.name}' registered for '${opportunity.title}' at '${formData.location}' for '${formData.time}'!`);
+    alert(`Registration Confirmed for ${opportunity.title}! Details:
+      Name: ${formData.name}
+      DOB: ${formData.dob}
+      Sex: ${formData.sex}
+      Location: ${formData.location}
+      Time: ${formData.time}
+    `);
+  };
+
 
   // DashboardPage component
   const DashboardPage = ({ setCurrentView, addNotification, notifications, showNotifications, setShowNotifications, markNotificationAsRead, unreadNotificationsCount }) => (
@@ -131,7 +287,7 @@ export default function App() {
           <h3 className="text-3xl font-bold mb-6">Empower Change: Join Our Volunteer Community</h3> 
           <div className="w-full h-auto rounded-full overflow-hidden shadow-lg">
             <img 
-              src="https://placehold.co/400x400/34D399/1F2937?text=Volunteers"
+              src="/HTA_Timber-Valley_Alpha-Kappa-Alpha_April-15-2023.jpg"
               alt="Volunteers working together" 
               className="w-full h-full rounded-full" 
             />
@@ -443,18 +599,7 @@ export default function App() {
   // This component represents the "By Location" page.
   const LocationView = ({ setBack }) => {
     // Dummy data for 10 locations.
-    const locations = [
-      { id: 1, name: "Community Garden", address: "123 Main St, Cityville", image: "https://placehold.co/100x100/A3E635/1F2937?text=Garden" },
-      { id: 2, name: "Central Park Cleanup", address: "456 Oak Ave, Townsville", image: "https://placehold.co/100x100/A3E635/1F2937?text=Park" },
-      { id: 3, name: "Food Bank Warehouse", address: "789 Pine Ln, Villagetown", image: "https://placehold.co/100x100/A3E635/1F2937?text=FoodBank" },
-      { id: 4, name: "Animal Shelter", address: "101 Maple Rd, Hamlet", image: "https://placehold.co/100x100/A3E635/1F2937?text=Shelter" },
-      { id: 5, name: "Elderly Care Center", address: "202 Elm Pl, Metropolis", image: "https://placehold.co/100x100/A3E635/1F2937?text=Care" },
-      { id: 6, name: "School Library", address: "303 Birch Ct, Suburbia", image: "https://placehold.co/100x100/A3E635/1F2937?text=Library" },
-      { id: 7, name: "Beach Cleanup", address: "404 Ocean Blvd, Seaside", image: "https://placehold.co/100x100/A3E635/1F2937?text=Beach" },
-      { id: 8, name: "Riverbank Restoration", address: "505 River Dr, Riverside", image: "https://placehold.co/100x100/A3E635/1F2937?text=River" },
-      { id: 9, name: "Urban Farming Project", address: "606 Field Rd, Countryside", image: "https://placehold.co/100x100/A3E635/1F2937?text=Farm" },
-      { id: 10, name: "Youth Sports Camp", address: "707 Court Ave, Sportstown", image: "https://placehold.co/100x100/A3E635/1F2937?text=Camp" },
-    ];
+    const locations = predefinedLocations; // Using the global predefinedLocations
 
     return (
       <div className="container mx-auto bg-white py-12 px-8 rounded-2xl shadow-xl max-w-lg">
@@ -494,9 +639,9 @@ export default function App() {
       <div className="bg-gray-100 p-6 rounded-xl text-center text-gray-500">
         <p className="mb-4">This is where your calendar component or a list of available dates will go.</p>
         <div className="grid grid-cols-3 gap-4 mb-4">
-            <div className="bg-white p-3 rounded-lg shadow-sm">31 August 2025</div>
-            <div className="bg-white p-3 rounded-lg shadow-sm">7 September 2025</div>
-            <div className="bg-white p-3 rounded-lg shadow-sm">14 September 2025</div>
+            {predefinedTimes.map((date, index) => (
+              <div key={index} className="bg-white p-3 rounded-lg shadow-sm">{date}</div>
+            ))}
         </div>
         <p>Below are the time slots for the selected date.</p>
         <div className="flex flex-wrap gap-2 justify-center mt-4">
@@ -522,35 +667,35 @@ export default function App() {
   );
 
   // New Opportunities List Page component
-  const OpportunitiesListPage = ({ setBack, addNotification }) => {
+  const OpportunitiesListPage = ({ setBack, addNotification, setShowRegistrationModal, setSelectedOpportunity }) => {
     // Dummy data for volunteer opportunities
     const opportunities = [
       {
         id: 1,
         title: "Youth Volunteer",
         organization: "Red Cross",
-        image: "https://placehold.co/200x200/FF0000/FFFFFF?text=Youth",
+        image: "/download (17).jpg",
         description: "Help with various youth programs."
       },
       {
         id: 2,
         title: "Education Volunteer",
         organization: "INC Organization",
-        image: "https://placehold.co/200x200/FFA500/000000?text=Education",
+        image: "/download (18).jpg",
         description: "Support educational initiatives."
       },
       {
         id: 3,
         title: "Charities Volunteer",
         organization: "Wings",
-        image: "https://placehold.co/200x200/ADD8E6/000000?text=Charities",
+        image: "/download (19).jpg",
         description: "Assist with charity events."
       },
       {
         id: 4,
         title: "Environmental Protection Volunteer",
         organization: "Ministry of Environment",
-        image: "https://placehold.co/200x200/008000/FFFFFF?text=Environment",
+        image: "/download (20).jpg",
         description: "Participate in environmental projects."
       },
     ];
@@ -563,9 +708,8 @@ export default function App() {
 
     const handleRegisterClick = (opportunity, event) => {
       event.stopPropagation(); // Prevent the card's onClick from firing
-      console.log(`Register clicked for: ${opportunity.title}`);
-      addNotification(`A user registered for ${opportunity.title}!`); // Add notification for registration
-      alert(`You've registered for ${opportunity.title}!`);
+      setSelectedOpportunity(opportunity); // Set the opportunity to be registered for
+      setShowRegistrationModal(true); // Open the registration modal
     };
 
     return (
@@ -626,7 +770,12 @@ export default function App() {
       case 'time':
         return <TimeView setBack={() => setCurrentView('dashboard')} />;
       case 'opportunitiesList': // New case for the Opportunities List
-        return <OpportunitiesListPage setBack={() => setCurrentView('dashboard')} addNotification={addNotification} />; // Pass addNotification
+        return <OpportunitiesListPage 
+          setBack={() => setCurrentView('dashboard')} 
+          addNotification={addNotification} 
+          setShowRegistrationModal={setShowRegistrationModal}
+          setSelectedOpportunity={setSelectedOpportunity}
+        />;
       case 'dashboard':
       default:
         return <DashboardPage 
@@ -644,6 +793,13 @@ export default function App() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-white">
       {renderView()}
+      {showRegistrationModal && selectedOpportunity && (
+        <RegistrationModal
+          opportunity={selectedOpportunity}
+          onClose={() => setShowRegistrationModal(false)}
+          onRegisterConfirm={handleRegisterConfirm}
+        />
+      )}
     </div>
   );
 }
