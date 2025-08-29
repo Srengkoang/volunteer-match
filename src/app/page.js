@@ -29,18 +29,16 @@ const LinkedInIcon = () => (
 
 // Define global lists for locations and times to be used in the dropdowns
 const predefinedLocations = [
-  { id: 1, name: "Community Garden", address: "123 Main St, Cityville", image: "https://placehold.co/100x100/A3E635/1F2937?text=Garden" },
-  { id: 2, name: "Central Park Cleanup", address: "456 Oak Ave, Townsville", image: "https://placehold.co/100x100/A3E635/1F2937?text=Park" },
-  { id: 3, name: "Food Bank Warehouse", address: "789 Pine Ln, Villagetown", image: "https://placehold.co/100x100/A3E635/1F2937?text=FoodBank" },
-  { id: 4, name: "Animal Shelter", address: "101 Maple Rd, Hamlet", image: "https://placehold.co/100x100/A3E635/1F2937?text=Shelter" },
-  { id: 5, name: "Elderly Care Center", address: "202 Elm Pl, Metropolis", image: "https://placehold.co/100x100/A3E635/1F2937?text=Care" },
-  { id: 6, name: "School Library", address: "303 Birch Ct, Suburbia", image: "https://placehold.co/100x100/A3E635/1F2937?text=Library" },
-  { id: 7, name: "Beach Cleanup", address: "404 Ocean Blvd, Seaside", image: "https://placehold.co/100x100/A3E635/1F2937?text=Beach" },
-  { id: 8, name: "Riverbank Restoration", address: "505 River Dr, Riverside", image: "https://placehold.co/100x100/A3E635/1F2937?text=River" },
-  { id: 9, name: "Urban Farming Project", address: "606 Field Rd, Countryside", image: "https://placehold.co/100x100/A3E635/1F2937?text=Farm" },
-  { id: 10, name: "Youth Sports Camp", address: "707 Court Ave, Sportstown", image: "https://placehold.co/100x100/A3E635/1F2937?text=Camp" },
+  { id: 1, name: "Community Garden", address: "Phnom Penh", image:"/0a84f2_a026931e22c444b182d14f8bac0148de~mv2.avif"},
+  { id: 2, name: "Central Park Cleanup", address: "Phnom Penh", image:"/People_jog_in_a_public_park_in_Phnom_Penh_on_J.width-960_WiIhNh2.jpg"},
+  { id: 3, name: "Food Bank Warehouse", address: "Battambang", image: "/images (37).jpg"},
+  { id: 4, name: "Animal Shelter", address: "Takeo", image: "/Bears-at-Phnom-Tamao-4(2).jpg"},
+  { id: 5, name: "School Library", address: "Siem Reap", image: "/cambodia-room-to-read.jpg"},
+  { id: 6, name: "Beach Cleanup", address: "SihanoukVille", image: "/1670582129t5lvc-1p311y-preview.jpg"},
+  { id: 7, name: "Riverbank Restoration", address: "Phnom Penh Riversidee", image: "/cambodia-4079037_1920-e1738659734858.jpg"},
+  { id: 8, name: "Urban Farming Project", address: "Kampong Cham", image: "/1670582129t5lvc-1p311y-preview.jpg"},
+  { id: 9, name: "Youth Sports Camp", address: "Kampong cham", image: "images (38).jpg"},
 ];
-
 const predefinedTimes = [
   "31 August 2025",
   "7 September 2025",
